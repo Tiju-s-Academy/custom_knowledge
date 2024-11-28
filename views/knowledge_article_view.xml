@@ -1,0 +1,134 @@
+<!-- views/knowledge_view.xml -->
+<odoo>
+    <record id="view_knowledge_article_tree" model="ir.ui.view">
+        <field name="name">knowledge.article.tree</field>
+        <field name="model">knowledge.article</field>
+        <field name="arch" type="xml">
+            <tree string="Knowledge Articles">
+                <field name="name"/>
+                <field name="date_published"/>
+            </tree>
+        </field>
+    </record>
+    <!-- kanban -->
+    <record id="view_knowledge_article_kanban" model="ir.ui.view">
+        <field name="name">knowledge.article.kanban</field>
+        <field name="model">knowledge.article</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="date_published"/>
+                <field name="cover_image"/> <!-- Binary field -->
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="o_kanban_card oe_kanban_global_click p-2 shadow-sm">
+                            <!-- Cover Image Section -->
+                            <div class="o_kanban_card_cover mb-2">
+                                <!-- Display the image if present -->
+                                <img t-att-src="kanban_image('knowledge.article', 'cover_image', record.id.raw_value)"
+                                     class="img-fluid rounded"
+                                     alt="Cover Image"
+                                     style="height: 180px; object-fit: cover; width: 100%;"/>
+                            </div>
+                            <!-- Title -->
+                            <div class="o_kanban_card_title text-letf">
+                                <strong>
+                                    <field name="name"/>
+                                </strong>
+                                <div>
+                                    <field name="department_id"/>
+                                    <field name="tag_ids" widget="many2many_tags"
+                                           options="{'color_field': 'color', 'no_create_edit': True}"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- form -->
+    <record id="view_knowledge_article_form" model="ir.ui.view">
+        <field name="name">knowledge.article.form</field>
+        <field name="model">knowledge.article</field>
+        <field name="arch" type="xml">
+            <form string="Knowledge Article" class="o_knowledge_main_view">
+                <div class="o_form_view_container">
+                    <div class="o_content o_knowledge_form_view d-flex border-top">
+                        <!-- Sidebar for Articles List -->
+                        <aside class="o_knowledge_sidebar d-flex flex-shrink-0 d-print-none bg-view"
+                               style="max-width: 250px">
+                            <div class="d-flex flex-column flex-grow-1 min-w-0"
+                                 style="max-height: 100%; overflow-y: auto;">
+                                <div class="d-flex align-items-center gap-2 px-md-3 px-3 ps-2 py-3">
+
+                                </div>
+                                <div class="o_knowledge_tree flex-fill position-relative o_scroll_view d-flex flex-column px-3">
+                                    <h4>Articles</h4>
+                                    <field name="name"/>
+                                    <field name="department_id" placeholder="Department.."/>
+                                    <field name="tag_ids" widget="many2many_tags"
+                                           options="{'color_field': 'color', 'no_create_edit': True}" placeholder="Tags"
+                                           groups="custom_knowledge.admin_knowledge_form" size="1"/>
+
+                                </div>
+                                <div class="o_knowledge_tree flex-fill position-relative o_scroll_view d-flex flex-column px-3">
+                                    <h4>Last Update</h4>
+                                    <field name="write_uid" widget="many2one_avatar_user" readonly="1"/>
+                                    <field name="write_date" readonly="1"/>
+                                </div>
+
+                            </div>
+                            <span class="o_knowledge_article_form_resizer d-none d-md-flex opacity-75 opacity-100-hover">
+                                <span class="bg-300 pe-1 ms-1"></span>
+                            </span>
+                        </aside>
+
+                        <!-- Main Content -->
+                        <div class="w-100">
+                            <!-- Header Bar -->
+                            <div class="d-flex justify-content-between w-100"
+                                 groups="custom_knowledge.admin_knowledge_form">
+                                <div class="text-start" style="padding:10px;">👋 Welcome
+                                    <field name="author_id" readonly="true"/>
+                                    <i class="fa fa-fw fa-lock"/>
+                                </div>
+                                <div class="text-end">
+                                    <button name="action_add_cover_video" type="object" class="btn btn-primary">
+                                        <i class="fa fa-fw fs-6 fa-film me-1" title="Add Video"></i>Add Video
+                                    </button>
+                                    <button name="action_add_cover" type="object" class="btn btn-secondary ms-2">
+                                        <i class="fa fa-fw fs-6 fa-picture-o me-1" title="Add Cover"></i>Add Cover
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- Cover Image -->
+                            <div class="w-100" style="height: 300px; overflow: hidden;" invisible="not cover_image">
+                                <field name="cover_image" widget="image" class="w-100" alt="image not visible"/>
+                            </div>
+                            <div invisible="not embed_code">
+                                <group>
+                                    <field name="embed_code" class="video-embed-preview" widget="video_preview"/>
+                                </group>
+                            </div>
+                            <!-- Article Content -->
+                            <div class="w-100" style="padding-top:70px;padding-left:20px;">
+                                <h2>
+                                    <field name="name" placeholder="Heading.." class="w-50"/>
+                                </h2>
+                                <field name="body" placeholder="
+                                type .. / and you can make whatever you want.."/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="action_knowledge_article" model="ir.actions.act_window">
+        <field name="name">Knowledge Articles</field>
+        <field name="res_model">knowledge.article</field>
+        <field name="view_mode">kanban,tree,form</field>
+    </record>
+</odoo>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="knowledge_groups" model="ir.module.category">
+        <field name="name">Knowledge</field>
+        <field name="sequence">22</field>
+        <field name="visible" eval="0"/>
+    </record>
+    <record id="admin_knowledge_form" model="res.groups">
+        <field name="name">admin</field>
+        <field name="category_id" ref="knowledge_groups"/>
+    </record>
+    <record id="viewers_knowledge_form" model="res.groups">
+        <field name="name">Viewers</field>
+        <field name="category_id" ref="knowledge_groups"/>
+    </record>
+</odoo>

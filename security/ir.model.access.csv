@@ -1,0 +1,10 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_knowledge_article_admin,knowledge.article_admin,model_knowledge_article,admin_knowledge_form,1,1,1,1
+access_knowledge_wizard_admin,knowledge_wizard_admin,model_knowledge_wizard,,1,1,1,1
+access_cover_video_wizard_admin,knowledge cover video,model_knowledge_video_wizard,,1,1,1,1
+access_knowledge_tags,knowledge Tags,model_knowledge_tag,admin_knowledge_form,1,1,1,1
+
+access_knowledge_article_user,knowledge.article_user,model_knowledge_article,viewers_knowledge_form,1,0,0,0
+access_knowledge_tags_user,knowledge.tags_user,model_knowledge_tag,viewers_knowledge_form,1,0,0,0
+
+

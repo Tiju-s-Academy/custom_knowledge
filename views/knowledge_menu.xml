@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem id="menu_knowledge_root"
+              name="Knowledge"
+              web_icon="custom_knowledge,static/description/icon.png"/>
+    <menuitem id="menu_knowledge_article"
+              parent="menu_knowledge_root"
+              name="Home"
+              action="action_knowledge_article"/>
+    <menuitem id="menu_knowledge_tags"
+              parent="menu_knowledge_root"
+              name="Tags"
+              action="actions_knowledge_tag_request"/>
+</odoo>

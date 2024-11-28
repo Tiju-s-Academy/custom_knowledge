@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="view_knowledge_tag_form" model="ir.ui.view">
+        <field name="name">knowledge.tag.form</field>
+        <field name="model">knowledge.tag</field>
+        <field name="arch" type="xml">
+            <form string="Employee Tags">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_knowledge_tag_tree" model="ir.ui.view">
+        <field name="name">knowledge.tag.tree</field>
+        <field name="model">knowledge.tag</field>
+        <field name="arch" type="xml">
+            <tree string="Employees Tags" editable="bottom">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+    <record id="actions_knowledge_tag_request" model="ir.actions.act_window">
+        <field name="name">knowledge Tags</field>
+        <field name="res_model">knowledge.tag</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>
