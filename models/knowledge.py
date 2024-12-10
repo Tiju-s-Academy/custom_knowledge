@@ -24,6 +24,12 @@ class KnowledgeArticle(models.Model):
                             help='URL of a video for showcasing your product.')
     embed_code = fields.Html(compute="_compute_embed_code", sanitize=False)
 
+    attachments_ids = fields.Many2many(
+        'ir.attachment',
+        string="Attachments",
+        help="Attach files like PDF, XLS, and PPT."
+    )
+
     @api.onchange('video_url')
     def _onchange_video_url(self):
         if not self.image_1920:
@@ -60,5 +66,6 @@ class KnowledgeArticle(models.Model):
             'target': 'new',
             'view_mode': 'form',
         }
+
 
 

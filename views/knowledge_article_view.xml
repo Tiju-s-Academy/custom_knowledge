@@ -78,6 +78,10 @@
                                     <field name="write_uid" widget="many2one_avatar_user" readonly="1"/>
                                     <field name="write_date" readonly="1"/>
                                 </div>
+                                <div class="o_knowledge_tree flex-fill position-relative o_scroll_view d-flex flex-column px-3">
+                                    <h4>attachments</h4>
+                                    <field name="attachments_ids" widget="many2many_binary" placeholder="Add attachments here..."/>
+                                </div>
 
                             </div>
                             <span class="o_knowledge_article_form_resizer d-none d-md-flex opacity-75 opacity-100-hover">
